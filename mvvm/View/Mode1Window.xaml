@@ -1,0 +1,94 @@
+﻿<Window x:Class="mvvm.View.Mode1Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Mode1Window" Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0">
+            <Button Content="start record" Command="{Binding RecordCommand}" IsEnabled="{Binding IsEnabledStartRecord}"></Button>
+            <Button Content="stop record" Command="{Binding StopRecordCommand}" IsEnabled="{Binding IsEnabledStopRecord}"></Button>
+            <Button Content="start repeat" Command="{Binding StartRepeatCommand}" IsEnabled="{Binding IsEnabledStartRepeat}"></Button>
+            <Button Content="stop repeat" Command="{Binding StopRepeatCommand}" IsEnabled="{Binding StopRepeatCommand}"></Button>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1">
+            <ItemsControl ItemsSource="{Binding MyMap.KinectList}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas>
+                            <!-- pozycja konkretnego kinecta z listy-->
+                            <Ellipse Fill="Red" Canvas.Left="{Binding X}" Canvas.Top="{Binding Y}" 
+        							Width="50" Height="50">
+                                <Ellipse.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="-25" Y="-25"/>
+                                    </TransformGroup>
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
+
+                            <Canvas x:Name="LineCanvas">
+                                <Line X1="0" Y1="0" 
+        								X2="100" Y2="0"
+        								Stroke="Black" RenderTransformOrigin="0,0" 
+        								Canvas.Left="{Binding X}" Canvas.Top="{Binding Y}">
+                                    <Line.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="{Binding Angle}"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Line.RenderTransform>
+                                </Line>
+                            </Canvas>
+                        </Canvas>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!--aktualna pozycja uzytkownika ze wszystkich kinectow-->
+            <Canvas>
+                <Ellipse Width="20" Height="20" Fill="Black" 
+                         Canvas.Left="{Binding MyMap.UserX}" Canvas.Top="{Binding MyMap.UserY}">
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="-10" Y="-10"></TranslateTransform>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+            </Canvas>
+            
+            <!--<ItemsControl ItemsSource="{Binding MyPath.TrackPath}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas>
+                            <Ellipse Canvas.Left="{Binding X}" Canvas.Top="{Binding Y}" 
+                                     Width="30" Height="30" Fill="BlueViolet">
+                                <Ellipse.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="-15" Y="-15"></TranslateTransform>
+                                    </TransformGroup>
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
+                        </Canvas>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>-->
+            <Canvas>
+                <Ellipse Canvas.Left="{Binding MyPath.NextToGet.X}" Canvas.Top="{Binding MyPath.NextToGet.Y}"
+                         Width="20" Height="20" Fill="DarkMagenta">
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="-10" Y="-10"></TranslateTransform>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+            </Canvas>
+        </StackPanel>
+        
+    </Grid>
+</Window>

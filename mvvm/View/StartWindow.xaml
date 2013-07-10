@@ -1,0 +1,11 @@
+﻿<Window x:Class="mvvm.View.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="StartWindow" Height="300" Width="300">
+    <Grid>
+        <StackPanel>
+            <Button Content="Tryb A" Command="{Binding Mode1Command}"></Button>
+            <Button Content="Tryb B" Command="{Binding Mode2Command}"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

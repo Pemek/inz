@@ -1,0 +1,13 @@
+﻿<Window x:Class="mvvm.View.CreateMapWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CreateMapWindow" Height="300" Width="300">
+    <Grid>
+        <StackPanel>
+            <Button Content="ustawienie przestrzeni" Command="{Binding SpaceConfigurationCommand}"></Button>
+            <Button Content="ustawienie przeszkod" Command="{Binding ConstructionConfigurationCommand}"></Button>
+            <Button Content="zapisz" Command="{Binding SaveMapCommand}"></Button>
+            <Button Content="wczytaj" Command="{Binding LoadMapCommand}"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
