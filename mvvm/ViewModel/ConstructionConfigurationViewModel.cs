@@ -39,17 +39,6 @@ namespace mvvm.ViewModel
         public DelegateCommand ChangeConstructionSoundCommand { get; set; }
         public DelegateCommand DeleteConstructionCommand { get; set; }
 
-        //private ObservableCollection<MConstruction> mConstructionList;
-        //public ObservableCollection<MConstruction> MConstructionList
-        //{
-        //    get { return mConstructionList; }
-        //    set
-        //    {
-        //        mConstructionList = value;
-        //        OnPropertyChanged("MConstructionList");
-        //    }
-        //}
-
         private Map myMap;
         public Map MyMap
         {
@@ -61,20 +50,6 @@ namespace mvvm.ViewModel
             }
         }
 
-        /// <summary>
-        /// nazwa aktualnie zaznaczonej konstrukcji
-        /// </summary>
-        //private string constructionName;
-        //public string ConstructionName
-        //{
-        //    get { return constructionName; }
-        //    set
-        //    {
-        //        constructionName = value;
-        //        //constructionName = MyMap.ConstructionList[ConstructionIndex].Name;
-        //        OnPropertyChanged("ConstructionName");
-        //    }
-        //}
         /// <summary>
         /// indeks aktualnie wybranej konstrukcji
         /// </summary>
@@ -121,6 +96,7 @@ namespace mvvm.ViewModel
             KinectInit.initConfigurationMode();
             //poczatkowa pozycja zaznaczonego po za ekran
             SelectedConstruction = new MConstruction("", -100, -100);
+            ConstructionIndex = -1;
 
             AddConstructionCommand = new DelegateCommand(AddConstructionAction);
             ChangeConstructionNameCommand = new DelegateCommand(ChangeConstructionNameAction);
