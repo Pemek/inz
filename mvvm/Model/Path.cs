@@ -43,10 +43,20 @@ namespace mvvm.Model
         private readonly BackgroundWorker repeatPathWorker = new BackgroundWorker();
 
         private Map MyMap;
+
+        /// <summary>
+        /// konstruktor
+        /// </summary>
         public Path()
         {
             TrackPath = new List<MConstruction>();
             NextToGet = new MConstruction("", -100, -100);
+
+            createPathWorker.WorkerSupportsCancellation = true;
+            createPathWorker.DoWork += createPathWorker_DoWork;
+
+            repeatPathWorker.WorkerSupportsCancellation = true;
+            repeatPathWorker.DoWork += repeatPathWorker_DoWork;
         }
 
         public bool isBusyCreateNewPath()
@@ -59,16 +69,28 @@ namespace mvvm.Model
         public void createNewPath(Map m)
         {
             MyMap = m;
-            createPathWorker.WorkerSupportsCancellation = true;
-            createPathWorker.DoWork += createPathWorker_DoWork;
+            
             createPathWorker.RunWorkerAsync();
         }
 
         private void createPathWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            if (createPathWorker.CancellationPending)
+            {
+                e.Cancel = true;
+                if (TrackPath != null)
+                {
+
+
+                    NextToGet = TrackPath[0];
+                }
+                return;
+            }
+
             TrackPath.Clear();
             while (true)
             {
+                //dodanie pierwszego elementu
                 if (MyMap.UserY != -100 && MyMap.UserX != -100)
                 {
                     TrackPath.Add(new MConstruction("", MyMap.UserX, MyMap.UserY));
@@ -89,12 +111,16 @@ namespace mvvm.Model
                     }
                     return;
                 }
-                if(Calculations.calculateDistance((TrackPath[TrackPath.Count-1].X), (TrackPath[TrackPath.Count-1]).Y, MyMap.UserX, MyMap.UserY) > 20)
-                {
-                    List<MConstruction> tmp = new List<MConstruction>(TrackPath);
-                    tmp.Add(new MConstruction("", MyMap.UserX, MyMap.UserY));
 
-                    TrackPath = new List<MConstruction>(tmp);
+                if (MyMap.UserX >= 0 && MyMap.UserY >= 0)
+                {    
+                    if(Calculations.calculateDistance((TrackPath[TrackPath.Count-1].X), (TrackPath[TrackPath.Count-1]).Y, MyMap.UserX, MyMap.UserY) > 20)
+                    {
+                        List<MConstruction> tmp = new List<MConstruction>(TrackPath);
+                        tmp.Add(new MConstruction("", MyMap.UserX, MyMap.UserY));
+
+                        TrackPath = new List<MConstruction>(tmp);
+                    }
                 }
                 Thread.Sleep(500);
             }
@@ -102,7 +128,8 @@ namespace mvvm.Model
 
         public void stopRecordPath()
         {
-            createPathWorker.CancelAsync();
+            if(createPathWorker.IsBusy)
+                createPathWorker.CancelAsync();
         }
 
 
@@ -123,7 +150,7 @@ namespace mvvm.Model
         public void repeatPath(Map m)
         {
             MyMap = m;
-            repeatPathWorker.DoWork += repeatPathWorker_DoWork;
+
             repeatPathWorker.RunWorkerAsync();
 
             //clearFirst();
@@ -140,24 +167,48 @@ namespace mvvm.Model
 
         private void repeatPathWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (true)
+            try
             {
-                if (TrackPath.Count == 1)
+
+                while (true)
                 {
-                    TrackPath.Clear();
-                    NextToGet = new MConstruction("", -100, -100);
-                    return;
+                    if (repeatPathWorker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        TrackPath.Clear();
+                        NextToGet = new MConstruction("", -100, -100);
+                        return;
+                    }
+                    if (TrackPath.Count == 1 || TrackPath.Count == 0)
+                    {
+                        TrackPath.Clear();
+                        NextToGet = new MConstruction("", -100, -100);
+                        return;
+                    }
+                    if (Calculations.calculateDistance(NextToGet.X, NextToGet.Y, MyMap.UserX, MyMap.UserY) < 20)
+                    {
+                        clearFirst();
+                    }
+                    else
+                    {
+                        //navigate to point
+                        Calculations.navigateToPoint(MyMap.UserX, MyMap.UserY, NextToGet.X, NextToGet.Y);
+                    }
+                    Thread.Sleep(500);
                 }
-                if (Calculations.calculateDistance(NextToGet.X, NextToGet.Y, MyMap.UserX, MyMap.UserY) < 20)
-                {
-                    clearFirst();
-                }
-                else
-                {
-                    //navigate to point
-                    Calculations.navigateToPoint(MyMap.UserX, MyMap.UserY, NextToGet.X, NextToGet.Y);
-                }
-                Thread.Sleep(1500);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// zakonczenie oddtwarzanie muzyki
+        /// </summary>
+        public void stopRepeatPath()
+        {
+            if (repeatPathWorker.IsBusy)
+            {
+                repeatPathWorker.CancelAsync();
+                TrackPath.Clear();
             }
         }
 

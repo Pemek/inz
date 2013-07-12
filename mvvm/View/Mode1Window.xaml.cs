@@ -28,6 +28,8 @@ namespace mvvm.View
 
             viewModel = vm;
             DataContext = vm;
+
+            Closing += viewModel.OnWindowClosing;
         }
     }
 }

@@ -201,7 +201,16 @@ namespace mvvm.ViewModel
 
         private bool StopRepeatCanExecute(object obj)
         {
+            MyPath.stopRepeatPath();
             return true;
+        }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            // Handle closing logic, set e.Cancel as needed
+            MyPath.stopRecordPath();
+            MyPath.stopRepeatPath();
+            //KinectInit.kinectStop();
         }
     }
 }

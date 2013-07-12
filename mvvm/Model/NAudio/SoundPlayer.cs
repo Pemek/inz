@@ -63,8 +63,11 @@ namespace mvvm.Model.NAudio
         {
             try
             {
-                streamLeft.Position = 0;
-                outLeft.Play();
+                if (streamLeft.Position == streamLeft.Length || streamLeft.Position == 0)
+                {
+                    streamLeft.Position = 0;
+                    outLeft.Play();
+                }
             }
             catch
             {
@@ -75,8 +78,11 @@ namespace mvvm.Model.NAudio
         {
             try
             {
-                streamRight.Position = 0;
-                outRight.Play();
+                if (streamRight.Position == streamRight.Length || streamRight.Position == 0)
+                {
+                    streamRight.Position = 0;
+                    outRight.Play();
+                }
             }
             catch
             {
@@ -87,8 +93,11 @@ namespace mvvm.Model.NAudio
         {
             try
             {
-                streamUp.Position = 0;
-                outUp.Play();
+                if (streamUp.Position == streamUp.Length || streamUp.Position == 0)
+                {
+                    streamUp.Position = 0;
+                    outUp.Play();
+                }
             }
             catch
             {
@@ -99,8 +108,11 @@ namespace mvvm.Model.NAudio
         {
             try
             {
-                streamDown.Position = 0;
-                outDown.Play();
+                if (streamDown.Position == streamDown.Length || streamDown.Position == 0)
+                {
+                    streamDown.Position = 0;
+                    outDown.Play();
+                }
             }
             catch
             {

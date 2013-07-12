@@ -107,7 +107,7 @@ namespace mvvm.ViewModel
         {
             // Handle closing logic, set e.Cancel as needed
             MyInstruments.stopMusic();
-            KinectInit.kinectStop();
+            //KinectInit.kinectStop();
         }
     }
 }

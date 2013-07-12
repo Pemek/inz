@@ -56,5 +56,12 @@ namespace mvvm.ViewModel
         {
             return true;
         }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            KinectInit.MyMap = MyMap;
+            //KinectInit.kinectStop();
+            // Handle closing logic, set e.Cancel as needed
+        }
     }
 }

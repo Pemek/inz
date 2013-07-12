@@ -89,6 +89,7 @@ namespace mvvm.ViewModel
         public ConstructionConfigurationViewModel(Map m)
         {
             MyMap = m;
+            //MyMap.kinectSensorInit();
             //MConstructionList = new ObservableCollection<MConstruction>(MyMap.ConstructionList);
 
             //MyMap.initConfigurationMode();
