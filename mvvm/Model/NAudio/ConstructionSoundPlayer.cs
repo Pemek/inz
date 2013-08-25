@@ -61,10 +61,13 @@ namespace mvvm.Model.NAudio
             //s.Position = 0;
             //DirectSoundOut o = new DirectSoundOut();
             //o.Init(s);
-            if (stream.Position == stream.Length || stream.Position == 0 || stream.Length/6 == stream.Position)
+            if (stream != null)
             {
-                stream.Position = 0;
-                outSound.Play();
+                if (stream.Position == stream.Length || stream.Position == 0 || stream.Length / 6 == stream.Position)
+                {
+                    stream.Position = 0;
+                    outSound.Play();
+                }
             }
         }
     }

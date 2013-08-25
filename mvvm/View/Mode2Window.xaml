@@ -1,7 +1,7 @@
 ﻿<Window x:Class="mvvm.View.Mode2Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Mode2Window" Height="300" Width="300">
+        Title="Mode2Window" Height="600" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"></ColumnDefinition>
