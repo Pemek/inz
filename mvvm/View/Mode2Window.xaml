@@ -9,7 +9,7 @@
         </Grid.ColumnDefinitions>
         
         <StackPanel Grid.Column="0">
-            <Button Content="start music" Command="{Binding PlayMusicCommand}"></Button>
+            <Button x:Name="StartMusic" Content="start music" Command="{Binding PlayMusicCommand}" IsEnabled="{Binding IsEnabledStartMusic}"></Button>
         </StackPanel>
                     
         <StackPanel Grid.Column="1">

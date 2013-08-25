@@ -12,8 +12,8 @@
         
         <StackPanel Grid.Column="0">
             <TextBlock Text="Wybierz tryb rozgrywki" Height="23"/>
-            <TextBlock x:Name="textBlockSzerokosc" Text="podaj szerokosc w cm" Height="23"/>
-            <TextBlock x:Name="textBlockWysokosc" Text="podaj wysokosc w cm" Height="23"/>
+            <TextBlock x:Name="textBlockSzerokosc" Text="podaj szerokosc w cm" Height="23" Visibility="Collapsed"/>
+            <TextBlock x:Name="textBlockWysokosc" Text="podaj wysokosc w cm" Height="23" Visibility="Collapsed"/>
             <TextBlock Height="23"/>
             <TextBlock Text="wybierz urzadzenie" Height="23"/>
             <TextBlock x:Name="textBlockKinectX" Text="podaj X kinecta" Height="23"/>
@@ -24,11 +24,11 @@
         
         <StackPanel Grid.Column="1">
             <ComboBox SelectedIndex="{Binding SelectedMode}">
-                <ComboBoxItem Content="tryb 1"></ComboBoxItem>
-                <ComboBoxItem Content="tryb 2"></ComboBoxItem>
+                <ComboBoxItem Content="Tryb 1"></ComboBoxItem>
+                <ComboBoxItem Content="Tryb 2"></ComboBoxItem>
             </ComboBox>
-            <TextBox x:Name="textBoxSzerokosc" Text="{Binding RecHeight}" Height="23"/>
-            <TextBox x:Name="textBoxWysokosc" Text="{Binding RecWidth}" Height="23"/>
+            <TextBox x:Name="textBoxSzerokosc" Text="{Binding RecHeight}" Height="23" Visibility="Collapsed"/>
+            <TextBox x:Name="textBoxWysokosc" Text="{Binding RecWidth}" Height="23" Visibility="Collapsed"/>
             <Button Content="OK" Command="{Binding SetDimensionCommand}" Background="#FFD4D0C8"/>
             <ComboBox ItemsSource="{Binding mKinectList}"
                       SelectedIndex="{Binding SelectedMKinectIndex}" Height="23">

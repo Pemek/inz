@@ -21,9 +21,9 @@ namespace mvvm.Model.NAudio
         {
             try
             {
-                path = "..\\..\\sounds\\" + soundName + ".mp3";
+                path = "sounds\\" + soundName + ".mp3";
 
-                WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader("..\\..\\sounds\\" + soundName + ".mp3"));
+                WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader("sounds\\" + soundName + ".mp3"));
                 stream = new BlockAlignReductionStream(pcm);
 
                 outSound = new DirectSoundOut();
@@ -37,7 +37,8 @@ namespace mvvm.Model.NAudio
 
         public void playSound()
         {
-            playMusicWorker.RunWorkerAsync();
+            if(!playMusicWorker.IsBusy)
+                playMusicWorker.RunWorkerAsync();
             //try
             //{
             //    stream.Position = 0;

@@ -35,6 +35,17 @@ namespace mvvm.ViewModel
             }
         }
 
+        private bool isEnabledStartMusic;
+        public bool IsEnabledStartMusic
+        {
+            get { return isEnabledStartMusic; }
+            set
+            {
+                isEnabledStartMusic = value;
+                OnPropertyChanged("IsEnabledStartMusic");
+            }
+        }
+
         public DelegateCommand PlayMusicCommand { get; set; }
 
         public Mode2ViewModel(Map m)
@@ -52,6 +63,7 @@ namespace mvvm.ViewModel
 
             PlayMusicCommand = new DelegateCommand(PlayMusicAction);
 
+            IsEnabledStartMusic = true;
 
         }
 
@@ -101,6 +113,7 @@ namespace mvvm.ViewModel
         private void PlayMusicAction(object obj)
         {
             MyInstruments.playMusic();
+            IsEnabledStartMusic = false;
         }
 
         public void OnWindowClosing(object sender, CancelEventArgs e)

@@ -4,8 +4,8 @@
         Title="StartWindow" Height="300" Width="300">
     <Grid>
         <StackPanel>
-            <Button Content="Tryb A" Command="{Binding Mode1Command}"></Button>
-            <Button Content="Tryb B" Command="{Binding Mode2Command}"></Button>
+            <Button Content="Tryb 1" Command="{Binding Mode1Command}"></Button>
+            <Button Content="Tryb 2" Command="{Binding Mode2Command}"></Button>
         </StackPanel>
     </Grid>
 </Window>
