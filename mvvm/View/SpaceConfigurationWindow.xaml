@@ -5,8 +5,8 @@
         Title="SpaceConfigurationWindow" Height="600" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
-        	<ColumnDefinition Width="15*"/>
-        	<ColumnDefinition Width="15*"/>
+        	<ColumnDefinition Width="160"/>
+        	<ColumnDefinition Width="150"/>
         	<ColumnDefinition Width="70*"/>
         </Grid.ColumnDefinitions>
         

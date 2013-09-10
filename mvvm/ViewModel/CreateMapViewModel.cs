@@ -19,6 +19,17 @@ namespace mvvm.ViewModel
         public DelegateCommand SaveMapCommand { get; set; }
         public DelegateCommand LoadMapCommand { get; set; }
 
+        private bool isEnabled;
+        public bool IsEnabled
+        {
+            get { return isEnabled; }
+            set
+            {
+                isEnabled = value;
+                OnPropertyChanged("IsEnabled");
+            }
+        }
+
 
         public CreateMapViewModel(Map m)
         {
@@ -29,6 +40,7 @@ namespace mvvm.ViewModel
 
             MyMap = m;
 
+            IsEnabled = false;
             //MKinectInit = kInit;
             //MKinectInit.setMap(MyMap);
 
@@ -60,6 +72,14 @@ namespace mvvm.ViewModel
             SpaceConfigurationViewModel vm = new SpaceConfigurationViewModel(MyMap);
             SpaceConfigurationWindow nw = new SpaceConfigurationWindow(vm);
             nw.ShowDialog();
+            if (MyMap.MapMode == 2)
+            {
+                IsEnabled = true;
+            }
+            else if (MyMap.MapMode == 1)
+            {
+                IsEnabled = false;
+            }
         }
 
         private bool SpaceConfigurationCanExecute(object obj)

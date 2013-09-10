@@ -181,6 +181,9 @@ namespace mvvm.ViewModel
         private void StartRepeatAction(object obj)
         {
             MyPath.repeatPath(MyMap);
+            IsEnabledStartRepeat = false;
+            IsEnabledStartRecord = false;
+            IsEnabledStopRecord = false;
             //MyPath.clearFirst();
 
             //IsEnabledStartRecord = false;
@@ -197,11 +200,16 @@ namespace mvvm.ViewModel
 
         private void StopRepeatAction(object boj)
         {
+            MyPath.stopRepeatPath();
+            IsEnabledStartRecord = true;
+            IsEnabledStopRecord = false;
+            IsEnabledStartRepeat = true;
+            //IsEnabledStopRepeat = false;
         }
 
         private bool StopRepeatCanExecute(object obj)
         {
-            MyPath.stopRepeatPath();
+            //MyPath.stopRepeatPath();
             return true;
         }
 

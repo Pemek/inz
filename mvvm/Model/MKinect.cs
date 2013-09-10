@@ -127,8 +127,11 @@ namespace mvvm.Model
 
         public void moveSensor()
         {
-            kinectMoveWorker.DoWork += kinectMoveWorker_DoWork;
-            kinectMoveWorker.RunWorkerAsync();
+            if (!kinectMoveWorker.IsBusy)
+            {
+                kinectMoveWorker.DoWork += kinectMoveWorker_DoWork;
+                kinectMoveWorker.RunWorkerAsync();
+            }
             //MyKinectSensor.ElevationAngle = 27;
             //Thread.Sleep(1000);
             //MyKinectSensor.ElevationAngle = -27;

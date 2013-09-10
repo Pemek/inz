@@ -5,7 +5,7 @@
     <Grid>
         <StackPanel>
             <Button Content="ustawienie przestrzeni" Command="{Binding SpaceConfigurationCommand}"></Button>
-            <Button Content="ustawienie przeszkod" Command="{Binding ConstructionConfigurationCommand}"></Button>
+            <Button Content="ustawienie przeszkod" Command="{Binding ConstructionConfigurationCommand}" IsEnabled="{Binding IsEnabled}"></Button>
             <Button Content="zapisz" Command="{Binding SaveMapCommand}"></Button>
             <Button Content="wczytaj" Command="{Binding LoadMapCommand}"></Button>
         </StackPanel>
