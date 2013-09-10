@@ -66,7 +66,7 @@
             </ItemsControl>
             <!--pozycja uzytkownika-->
             <Canvas>
-                <Ellipse Width="20" Height="20" Fill="Black" 
+                <Ellipse Width="20" Height="20" Fill="Black"
                              Canvas.Left="{Binding MyMap.UserX}" Canvas.Top="{Binding MyMap.UserY}">
                     <Ellipse.RenderTransform>
                         <TransformGroup>
